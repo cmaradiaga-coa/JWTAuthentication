@@ -27,9 +27,11 @@ public class JwtService
         if (string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
             return null;
 
+        //? verificar si el usuario existe y si la contraseña es correcta: (PasswordHashHandler.VerifyPassword) esta función se encuentra en la clase PasswordHashHandler.    
         var userAccount = await _dbContext.UserAccounts.FirstOrDefaultAsync(x => x.UserName == request.UserName);
         if (userAccount is null || !PasswordHashHandler.VerifyPassword(request.Password, userAccount.Password!))
             return null;
+
 
         var issuer = _configuration["JwtConfig:Issuer"];
         var audience = _configuration["JwtConfig:Audience"];

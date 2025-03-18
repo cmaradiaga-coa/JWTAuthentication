@@ -39,9 +39,14 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+//! para PostgreSQL:
+// builder.Services.AddDbContext<AppDbContext>(options =>
+//     options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
 
+//! para sqlserver:
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 //! JWT para la API:
 builder.Services.AddAuthentication(options =>
@@ -67,7 +72,7 @@ builder.Services.AddAuthentication(options =>
 
 //? SAY
 builder.Services.AddAuthorization();
-builder.Services.AddScoped<JwtService>();
+builder.Services.AddScoped<JwtService>(); //? depedencia para el servicio de JWT que se usa en el constructor de la clase AccountController.
 
 var app = builder.Build();
 
