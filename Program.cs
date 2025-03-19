@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-//! La parte de Swagger: (para JWT)
+//! La parte de Swagger: (para que pueda usar autenticación JWT. Utilizar el botón Authorize que está arriba a la derecha de la página de Swagger para ingresar el token JWT)
 builder.Services.AddSwaggerGen(options => 
 {
     var jwtSecurityScheme = new OpenApiSecurityScheme
