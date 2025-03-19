@@ -12,10 +12,18 @@ public class AccountController : ControllerBase
 {
     private readonly JwtService _jwtService;
 
+    //? Esta es la forma corta de hacer inyección de dependencias:
     public AccountController(JwtService jwtService) =>
          _jwtService = jwtService;
 
 
+    //? Esta sería la forma común.
+    // public AccountController(JwtService jwtService)
+    // {
+    //     _jwtService = jwtService;
+    // }
+
+    //? POST: api/Account/Login 
     [AllowAnonymous]
     [HttpPost("Login")]
     public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel request)

@@ -6,6 +6,7 @@ namespace WebApiDemo.Data;
 
 public class AppDbContext : DbContext
 {
+    private string clave = PasswordHashHandler.HashPassword("admin123");
     public AppDbContext(DbContextOptions options) : base(options)
     {
         
@@ -13,18 +14,18 @@ public class AppDbContext : DbContext
 
     public DbSet<UserAccount> UserAccounts { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     base.OnModelCreating(modelBuilder);
 
-        _ = modelBuilder.Entity<UserAccount>().HasData([
-                new UserAccount
-                {
-                    Id = 1,
-                    FullName = "Administrator",
-                    UserName = "admin",
-                    Password = PasswordHashHandler.HashPassword("admin123")
-                }
-            ]);
-    }
+    //     _ = modelBuilder.Entity<UserAccount>().HasData([
+    //             new UserAccount
+    //             {
+    //                 Id = 1,
+    //                 FullName = "Administrator",
+    //                 UserName = "admin",
+    //                 Password =  clave // PasswordHashHandler.HashPassword("admin123")
+    //             }
+    //         ]);
+    // }
 }
